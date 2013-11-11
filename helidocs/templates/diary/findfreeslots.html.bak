@@ -1,0 +1,72 @@
+{%extends "flights/flights_base.html" %}
+
+{% load custom_templates %}
+
+{%block title%}Find Slots{%endblock%}
+
+{%block css%}<script src="/static/sorttable.js"></script>
+<script type="text/javascript">
+function OpenNewEvent(sURL)
+{
+    var newwindow;
+    newwindow = window.open(sURL,"Enter New Event","height=620,width=540,toolbar=no,location=no,scrollbars=yes,statusbar=no,resizable=no");
+    if (window.focus) {
+    newwindow.focus()
+            }
+     }
+
+</script>
+{% endblock %}
+
+{%block content%}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"> <a href="{% url "helidocs.diary.views.flights" %}">Helicopter Docs</a></h1>
+        </div>
+        <div id="user-tools">
+            Welcome,
+            <strong>{{  user.username }}</strong>.
+           <!-- <a href="/admin/password_change/">
+                Change password</a> / -->
+            <a href="/logoutuser/">
+                Log out</a>
+        </div>
+    </div>
+    <hr>
+    {% for breadcrumb in request.breadcrumbs %}
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>{% if not forloop.last %} >> {% endif %}
+        {% endfor %}
+    <!-- END Header -->
+
+<table cellspacing="0" width=100%>
+<tr><td>
+	<caption><a href="{% url "helidocs.diary.views.findfreeseats" back%}" style="float: left"><<</a><div style="float: left">&nbsp; {{ date }}</div> &nbsp;<a href="{% url "helidocs.diary.views.findfreeseats" forwards%}" style="float: left">&nbsp;>></a>
+    <a title="Back to HomePage" href="{% url "helidocs.diary.views.homepage" %}"><IMG width=210 SRC="/static/helidocs_whitebg.png" ALT="No image to display" style="float: right"></a>
+    </caption>
+</td>
+</tr>
+</table>
+<table class="sortable" id="completed" align="left" width=100%>
+<tr><th>Time</th><th>Ship</th><th>Duration</th><th>Taken</th><th>Available</th><th>Other Seats</th></tr>
+
+
+{% for e in events %}
+<tr>
+<td sorttable_customkey="{{ e.starttime|date:"YmdHi"}}"><a title="Open Day to View" target="_blank" href="{% url "helidocs.diary.views.daytoview" e.starttime|date:'Y-m-d'%}">{{ e.starttime|date:"H:i d/m/Y" }}</a> </td>
+<td>{{ e.ship.registration }} </td>
+<td>{{ e.duration }}</td>
+
+<td>{{ e.taken }}</td>
+
+<td>{% if e.available and e.available|ltfloat:0.0 %} <font color="red">{{ e.available }} {% else %} <a href="javascript:void(0)" onClick="OpenNewEvent('{% url "helidocs.diary.views.calendaradd" e.link%} ');return false;">{{ e.available }} </a> {% endif %}</td>
+<td>{{ e.otherseats }}</td>
+
+</tr>
+
+{% endfor %}
+
+
+</table>
+
+{% endblock %}

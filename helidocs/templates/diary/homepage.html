@@ -1,0 +1,98 @@
+
+{%extends "flights/flights_base.html"%}
+{%block title%}Helidocs Home{%endblock%}
+
+
+{% block headerscripts %}
+
+{%endblock%}
+{% load breadcrumbs %}
+
+{%block headercontent%}
+   <!-- {% breadcrumb 'Home' servicebulletins %}-->
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"> <a title="Back to HomePage" href='{% url "helidocs.diary.views.homepage" %}'>Helicopter Docs</a></h1>
+        </div>
+        <div id="user-tools">
+            Welcome,
+            <strong>{{  user.username }}</strong>.
+           <!-- <a href="/admin/password_change/">
+                Change password</a> / -->
+            <a href="/logoutuser/">
+                Log out</a>
+        </div>
+    </div>
+<hr>
+
+    <div align="center">
+    <table style="width: 98%;">
+         <tr>
+             <td width=35%></td>
+             <td width=30% class="nhtitle">Northumbria Helicopters</td>
+             <td class="t-header-right" width=35%>
+             <IMG width=210 SRC="/static/helidocs_whitebg.png" ALT="No image to display" style="float: right">
+            </td>
+         </tr>
+     </table>
+     </div>
+<hr>
+{% endblock %}
+
+{%block content%}
+    <table width=30% align="center">
+    <tr>
+        <td class="t-center">
+            <a title="Book out Flights" href=""><IMG width=108 SRC="/static/helicopter-icon.gif" title="Flights" ALT="Flights" style="float: left"></a>
+        </td>
+        <td class="t-center">
+            <a title="Fuel" href=""><IMG width=89 SRC="/static/fuel-icon.png" title"Fuel"= ALT="Fuel" style="float: right"></a>
+        </td>
+        <td class="t-center">
+            <a title="Find Seats" href="{% url "helidocs.diary.views.findfreeseats" %}"><IMG width=89 SRC="/static/red-question-mark.png" ALT="Find Seats" style="float: right"></a>
+        </td>
+    </tr>
+        <tr>
+            <td class="t-center">
+                <a title="Check In" href=""><IMG width=108 SRC="/static/boarding.png" title="Boarding" ALT="Boarding" style="float: left"></a>
+            </td>
+            <td class="t-center">
+                <a title="Vouchers" href=""><IMG width=108 SRC="/static/voucher.png" title="Vouchers" ALT="Vouchers" style="float: right"></a>
+            </td>
+            <td></td>
+
+        </tr>
+        <tr>
+            <td class="t-center">
+                <a title="Student Records" href=""><IMG width=108 SRC="/static/student-icon.gif" title="Students" ALT="Students" style="float: left"></a>
+            </td>
+            <td class="t-center">
+                <a title="Maintenance" href=""><IMG width=108 SRC="/static/maintenance.png"  title="Maintenance" ALT="Maintenance" style="float: right"></a>
+            </td>
+        </tr>
+        <tr>
+            <td class="t-center">
+                <a title="Diary" href="{% url "helidocs.diary.views.calendar" %} "><IMG width=108 SRC="/static/ec_calendar_gen.gif" title="Diary" ALT="Diary"style="float: left"> </a>
+            </td>
+            <td class="t-center">
+                <a title="Diary" href="{% url "helidocs.diary.views.daytoview" %} "><IMG width=108 SRC="/static/calendaricon.png" title="Day To View" ALT="Day To View" style="float: right"></a>
+            </td>
+            <td></td>
+        </tr>
+                <tr>
+            <td class="t-center">
+                <a title="Passenger" href=""><IMG width=108 SRC="/static/passenger.png" title="LoadSheet" ALT="LoadSheet"style="float: left"> </a>
+            </td>
+                 <td class="t-center">
+                <a title="Group-On" href=""><IMG width=108 SRC="/static/groupon-logo.jpg" title="Group-On" ALT="Group-On" style="float: right"></a>
+            </td>
+                    <td></td>
+        </tr>
+    <tr>
+
+    </tr>
+
+    </table>
+{% endblock %}

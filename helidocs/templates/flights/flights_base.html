@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>{%block title%}{%endblock%}</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27430461-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    <style type="text/css">
+
+       .weather a {font-family: Calibri;font-size:80%;text-align:left;vertical-align: middle;}
+       a:active, a:selected { border: none;outline: none;}
+       .deletecheckout {font-family: Calibri;font-size:80%;text-align:right;}
+      .nhtitle {font-family: Calibri,Verdana, Geneva, Tahoma, sans-serif;color:#800080;font-weight:bold;font-size:160%;text-align:center;}
+      .fuel h2 {font-family: Calibri,Verdana, Geneva, Tahoma, sans-serif;color:#800080;}
+      .checkout th {border-bottom: 1px solid;padding: 4px 8px 4px 4px;font-family:Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:center;}
+      .checkout td {padding: 4px 8px 4px 4px;font-family: Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:left;}
+      .checkout .right {padding: 4px 8px 4px 4px;font-family: Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:right;}
+
+      .dispatched th {border-bottom: 1px solid;color: #800080; padding: 4px 8px 4px 4px;font-family:Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:center;}
+      .dispatched td {color: #800080; padding: 4px 8px 4px 4px;font-family: Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:left;}
+
+      .dispatchout th {font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;}
+      .errorlist {color: red; font-family:Verdana, Geneva, Tahoma, sans-serif;font-size:80%;text-align:left;}
+      .dispatchout select {font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;}
+      .dispatchout textarea {font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;}
+      .dispatchout input {font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:80%;}
+
+      .fe-right  {0px;color:black;font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:90%;text-align:right;width:10%}
+
+      #fuel-table th {border: 1px solid #800080;padding-left: 2px;padding-right: 2px;color:black;font-size:70%;text-align:center;}
+      #fuel-table tr {border: 1px solid #800080; font-family:Verdana, Geneva, Tahoma, sans-serif;}
+      #fuel-table td  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:center;}
+
+      #completed tr {border: 1px solid #800080; font-family:Verdana, Geneva, Tahoma, sans-serif;}
+      #completed th  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:center;}
+      #completed #date  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:left;width:10%}
+      #completed .right  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:right;width:10%}
+      #completed .rightcost  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:right;padding-right: 5px;}
+      #completed .even {background-color:#F8F4EC;}
+
+      #completed td  {border: 1px solid #800080;padding: 0;color:black;font-size:70%;text-align:center;}
+      #completed .noborder {border: 0px solid #800080;}
+      #completed .totals {text-align: center;font-weight:bold;}
+
+      #checkflights tr {border: 1px solid #800080; font-family:Verdana, Geneva, Tahoma, sans-serif;}
+      #checkflights th  {border: 1px solid #800080;padding: 0;font-size:70%;text-align:center;}
+      #checkflights td  {border: 1px solid #800080;padding: 0;font-size:70%;text-align:center;}
+      #checkflights .even {background-color:#F8F4EC;}
+
+
+
+/* HEADER */
+
+      #header {background: #800080;color: #ffc;overflow: hidden;}
+      #header a:link, #header a:visited {color: white;}
+      #header a:hover {text-decoration: underline;}
+      #branding h1 {font-family:Verdana;font-size: 14px;padding: 0 10px;margin: 8px 0;font-weight: normal;color: #ffffff;}
+      #branding h2 {padding: 0 10px;font-size: 14px;margin: -8px 0 8px 0;font-weight: normal; color: #ffc;}
+      #user-tools {font-family:Verdana;position: absolute;top: 0;right: 0;padding: 1.2em 10px;font-size: 11px;text-align: right;}
+
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        z-index:50;
+}
+
+    </style>
+
+{%block css%}{%endblock%}
+
+{%block headerscripts%}{%endblock%}
+
+{%block headercontent%}{%endblock%}
+
+</head>
+<body>
+
+{%block content%}{%endblock%}
+<hr>
+
+{%block footer%}{%endblock%}
+
+</body>
+</html>

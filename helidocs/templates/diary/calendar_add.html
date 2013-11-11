@@ -1,0 +1,113 @@
+{%extends "diary/calendar_base.html" %}
+{% load custom_templates %}
+
+
+{%block title%}Calendar Add{%endblock%}
+
+{% block css %}
+    <style type="text/css">
+    .eventadd  {color:black;font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:90%;}
+    .eventadd select {color:black;font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:90%;}
+    .eventadd input {color:black;font-family:Calibri,Verdana, Geneva, Tahoma, sans-serif;font-size:90%;}
+
+    </style>
+    <!-- Loading Theme file(s) -->
+    <link rel="stylesheet" href="/static/js_dt_picker/themes/forest.css" />
+    <link rel="stylesheet" href="/static/js_dt_picker/themes/layouts/small.css" />
+
+<!-- Loading Calendar JavaScript files -->
+    <script type="text/javascript" src="/static/js_dt_picker/src/calendar.js"></script>
+<!-- Loading language definition file -->
+    <script type="text/javascript" src="/static/js_dt_picker/lang/calendar-en.js"></script>
+
+
+
+{% endblock %}
+
+{%block headerscripts%}
+<link type="text/css" rel="stylesheet" href="/static/jquery.autocomplete.css">
+<script type="text/javascript" src="/static/jquery.min.js"></script>
+<script type="text/javascript" src="/static/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/jquery.autocomplete.js"></script>
+
+<script>
+
+function get_voucher_details()
+{
+    valv=document.getElementById('id_voucher').value;
+    if (valv.indexOf('(voucher)')!=-1){
+ //       alert(valv.indexOf('(voucher)'));
+        $.get("/get_voucher_contacts/"+valv,
+                function(data){
+                    $('#id_name').val(data.split("|")[1]);
+                    $('#id_mobile').val(data.split("|")[0]);
+                    $('#id_seats').val(data.split("|")[2]);
+                    $('#id_details').val(data.split("|")[3]);
+                }
+        );
+    }
+}
+function get_student_details()
+{
+    valv=document.getElementById('id_name').value;
+        $.get("/get_student_contacts/"+valv,
+                function(data){
+                    if (data){
+                    $('#id_mobile').val(data.split("|")[1]);
+                    $('#id_email').val(data.split("|")[0]);
+                        }
+                }
+        );
+
+}
+
+$(document).ready(function(){
+
+        $.get("/get_voucher",function(returndata){
+        $("#id_voucher").autocomplete(returndata.split("|"));
+  });
+        document.getElementById("id_voucher").onblur=get_voucher_details;
+
+})
+
+$(document).ready(function(){
+
+        $.get("/get_student",function(returndata){
+        $("#id_name").autocomplete(returndata.split("|"));
+  });
+        document.getElementById("id_name").onblur=get_student_details;
+
+})
+
+
+function jqueryit(){
+$.get("/get_voucher",function(returndata){
+        alert(returndata);
+        $("#id_voucher").autocomplete(returndata);
+});
+ }
+
+</script>
+
+
+    {% if not newevent %}
+    <script type="text/javascript">
+       opener.location.reload(true);
+       opener.focus();
+       self.close();
+        </script>
+    {% endif %}
+{%endblock%}
+
+
+{%block content%}
+    <form name="form" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+    <table class="eventadd" width=100%>
+        {{ newevent.as_table }}
+        <td></td>
+    <td class="t1-center" colspan="1">
+    <input type="image" width=132 src="/static/update.png" name="submit" value="Submit Event"/>
+    </td>
+    </table>
+    </form>
+{%endblock%}

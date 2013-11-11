@@ -1,0 +1,68 @@
+{%extends "diary/flights_base.html" %}
+{% load custom_templates %}
+
+{%block title%}Calendar Import{%endblock%}
+
+{%block css%}
+<style type="text/css">
+      #import-table th {border: 1px solid #800080;padding-left: 2px;padding-right: 2px;color:black;font-size:70%;text-align:center;}
+      #import-table tr {border: 1px solid #800080; font-family:Verdana, Geneva, Tahoma, sans-serif;}
+      #import-table td  {border: 1px solid #800080;padding: 0px;color:black;font-size:70%;text-align:center;}
+</style>
+{%endblock%}
+
+{%block headerscripts%}
+{%endblock%}
+
+
+{%block content%}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"> <a href="{% url "helidocs.diary.views.homepage" %}">Helicopter Docs</a></h1>
+        </div>
+        <div id="user-tools">
+            Welcome,
+            <strong>{{  user.username }}</strong>.
+           <!-- <a href="/admin/password_change/">
+                Change password</a> / -->
+            <a href="/logoutuser/">
+                Log out</a>
+        </div>
+    </div>
+    <hr>
+    {% for breadcrumb in request.breadcrumbs %}
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>{% if not forloop.last %} >> {% endif %}
+        {% endfor %}
+    <!-- END Header -->
+
+<div align="left" class="fuel">
+<table width=98% class="record"  align="center">
+<tr><td colspan="3">
+</td><td rowspan="3" width="30%"><a title="Back to HomePage" href="{% url "helidocs.diary.views.homepage" %}"><IMG width=210 SRC="/static/helidocs_whitebg.png" ALT="No image to display" style="float: right"></a></td> </tr>
+
+<tr><td width=500px><strong><h2>Calendar Import:</h2></strong></td><td></td></tr>
+</table>
+    <hr>
+
+<hr>
+<table class="sortable" id="import-table" align="left" style="padding: 4px;">
+    <tr><th>Error</th><th>Date</th><th>Name</th><th>Activity</th><th>Duration</th><th>Voucher</th><th>Seats</th><th>Long Date</th><th>Original Subject</th></tr>
+    {% for p in imports %}
+    <tr>
+    <td>{{ p.error }}</td>
+    <td>{{ p.st|date:"H:i d/m/Y"}}</td>
+    <td>{{ p.Name }}</td>
+    <td class="right">{{ p.Activity }}</td>
+    <td class="right">{{ p.time }}</td>
+    <td class="right">{{ p.POVoucher_Number }}</td>
+    <td class="right">{{ p.Number_of_Places }}</td>
+    <td class="right">{{ p.Date_of_Activity }}</td>
+    <td class="right" style="color: #8a2be2;">{{ p.subject }}</td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+<br><br><br><br>
+{% endblock %}

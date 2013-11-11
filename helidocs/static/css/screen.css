@@ -1,0 +1,155 @@
+/*
+	Calendar CSS - by Nathan Smith - www.sonspring.com
+*/
+
+/* =Basic HTML
+----------------------------------------------------------------------*/
+
+a
+{
+	cursor: pointer;
+	text-decoration: none;
+}
+
+body
+{
+	background: #fff url(../img/body.gif) repeat-y top center;
+	color: #000;
+	cursor: default;
+	margin: 0;
+	padding: 0;
+}
+
+caption
+{
+	background: url(../img/logo.gif) no-repeat;
+	border-top: 5px solid #800080;
+	margin: 0 auto;
+	text-align: right;
+	font: 20px/30px "Trebuchet MS", sans-serif;
+}
+
+p
+{
+	margin: 0;
+}
+
+strong
+{
+	text-transform: uppercase;
+}
+
+table
+{
+	background: #fff;
+	border-bottom: 3px solid #000;
+	border-right: 1px solid #000;
+	margin: 0 auto;
+}
+
+th,
+td
+{
+	border-left: 1px solid #000;
+	border-top: 1px solid #000;
+	font-family: Verdana, sans-serif;
+	padding: 0 2px;
+	vertical-align: top;
+	width: 120px;
+	height: inherit;
+}
+table.running
+{
+    width:800px;
+}
+
+td a
+{
+	background: url(../img/arrow.gif) no-repeat center left;
+	color: #33f;
+	padding: 0 0 0 10px;
+}
+.number td a
+{
+    color: yellow;
+}
+
+td.time
+{
+    vertical-align: middle;
+    font-size: 20px;
+    text-align: center;
+}
+
+td.timemax
+{
+    vertical-align: middle;
+    font-size: 20px;
+    text-align: center;
+    width:13%;
+}
+
+td a:hover
+{
+	text-decoration: underline;
+}
+
+/* =Classes
+----------------------------------------------------------------------*/
+
+col.Sat,
+col.Sun
+{
+	background: #ffd;
+}
+
+div.buttons
+{
+	font: 10px Verdana, sans-serif;
+	padding: 10px 0 20px;
+	text-align: center;
+}
+
+div.buttons a
+{
+	background: #000;
+	border: 1px solid #bbb;
+	color: #fff;
+	padding: 3px 5px;
+}
+
+div.buttons a:hover
+{
+	background-color: #ddd;
+	color: #333;
+}
+
+tr.day
+{
+	color: #666;
+	font-size: 9px;
+	height: 90px;
+}
+
+tr.number
+{
+	background: #800080;
+	color: #FFFFFF;
+	font-size: 10px;
+	height: 15px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+th
+{
+	background: #000;
+	color: #fff;
+	font-size: 11px;
+	font-variant: small-caps;
+	font-weight: normal;
+	height: 15px;
+	text-transform: capitalize;
+	text-align: center;
+	vertical-align: middle;
+}

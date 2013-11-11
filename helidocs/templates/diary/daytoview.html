@@ -1,0 +1,146 @@
+{%extends "diary/calendar_base.html" %}
+{% load custom_templates %}
+
+{%block title%}Calendar{%endblock%}
+
+{%block css%}
+<link href="/static/css/screen.css" rel="stylesheet" type="text/css" media="screen, projection" />
+<link href="/static/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<script type="text/javascript" src="/static/jquery-1.6.1.min.js"></script>
+
+
+    <style type="text/css">
+     .helidocs table {border-left: 0px;font-family:Verdana;font-size: 11px;text-align: right;}
+
+    /* HEADER */
+      #header {background: #800080;color: #ffc;overflow: hidden;}
+      #header a:link, #header a:visited {color: white;}
+      #header a:hover {text-decoration: underline;}
+      #branding h1 {font-family:Verdana;font-size: 14px;padding: 0 10px;margin: 8px 0;font-weight: normal;color: #ffffff;}
+      #branding h2 {padding: 0 10px;font-size: 14px;margin: -8px 0 8px 0;font-weight: normal; color: #ffc;}
+      #user-tools {font-family:Verdana;position: absolute;top: 0;right: 0;padding: 1.2em 10px;font-size: 11px;text-align: right;}
+    </style>
+
+
+{%endblock%}
+
+{%block headerscripts%}
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $(".tick").click(function(){
+        $('body').css('cursor','wait');
+        $.get("/setcomplete/"+$(this).attr('id'),function(data){
+            $('body').css('cursor','auto');
+        });
+        var $link="#T"+$(this).attr('id');
+        var $html='<font color="#009933"><b>'+$($link).html();+"</b></font>";
+        $($link).html($html);
+
+    });
+
+})
+
+function OpenNewEvent(sURL)
+     {
+       var newwindow;
+       newwindow = window.open(sURL,"Enter New Event","height=620,width=540,toolbar=no,location=no,scrollbars=yes,statusbar=no,resizable=no");
+       if (window.focus) {
+        newwindow.focus()
+       }
+     }
+function OpenNewVoucherEvent(sURL)
+{
+    var newwindow;
+    newwindow = window.open(sURL,"Voucher Edit","height=640,width=620,toolbar=no,location=no,scrollbars=yes,statusbar=no,resizable=yes");
+    if (window.focus) {
+        newwindow.focus()
+    }
+}
+</script>
+{%endblock%}
+
+
+{%block content%}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"> <a href="{% url "helidocs.diary.views.calendar" %}">Helicopter Docs</a></h1>
+        </div>
+        <div id="user-tools">
+            Welcome,
+            <strong>{{  user.username }}</strong>.
+           <!-- <a href="/admin/password_change/">
+                Change password</a> / -->
+            <a href="/logoutuser/">
+                Log out</a>
+        </div>
+    </div>
+    <hr>
+    {% for breadcrumb in request.breadcrumbs %}
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>{% if not forloop.last %} >> {% endif %}
+        {% endfor %}
+    <!-- END Header -->
+
+
+<table cellspacing="0">
+	<caption><a href="{% url "helidocs.diary.views.daytoview" back%}" style="float: left"><<&nbsp;</a><div style="float: left"> {{ date }}</div> &nbsp;<a href="{% url "helidocs.diary.views.daytoview" forwards%}" style="float: left">&nbsp;>></a>
+    <a title="Back to HomePage" href="{% url "helidocs.diary.views.homepage" %}"><IMG width=210 SRC="/static/helidocs_whitebg.png" ALT="No image to display" style="float: right"></a>
+    </caption>
+	<colgroup>
+		<col class="Sun" />
+		<col class="Mon" />
+		<col class="Tue" />
+	</colgroup>
+	<thead>
+		<tr>
+            <th scope="daycol">TIME</th>
+            <th scope="daycol">INFO/OTHER</th>
+			<th scope="daycol">G-MAVI (R22)</th>
+			<th scope="daycol">G-MOGY (R22)</th>
+			<th scope="daycol">G-CDXA (R44)</th>
+            <th scope="daycol">CARLISLE</th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for cols in days %}
+		<tr class="number">
+            {% for c in cols %}
+                <td>
+                {% if c.day %}
+                    {% if c.link|endswith:'5' %}
+                <a href="javascript:void(0)" onClick="OpenNewEvent('{% url "helidocs.diary.views.grouponadd" c.link%} ');return false;"><img  border="0" src="/static/groupon.png" alt="New Event" width="12" height="12" /></a>
+                    {% endif %}
+                <a href="javascript:void(0)" onClick="OpenNewEvent('{% url "helidocs.diary.views.calendaradd" c.link%} ');return false;"><img  border="0" src="/static/purpleadd.png" alt="New Event" width="12" height="12" /></a>
+                    {{c.day}}
+                    &nbsp;
+                    {% if c.event %}
+                <img class="tick" id="{{ c.id }}" style="float:right;" border="0" src="/static/check-mark-in-white-hi.png" title="Flight Complete" alt="Complete" width="12" height="12" />
+                        {% endif %}
+                {% endif %}
+
+            </td>
+            {% endfor %}
+		</tr>
+		<tr class="day">
+            {% autoescape off %}
+            {% for c in cols %}
+                {% if c.day %}
+			        <td>
+                {% else %}
+                    <td class="time">
+                {% endif %}<div id="T{{ c.id }}">
+                {{c.event}}</div></td>
+            {% endfor %}
+            {% endautoescape %}
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>
+<div class="buttons">
+<a href="#" onclick="window.print(); return false;">Print Calendar</a>
+<a href="/loadsheet/{{ dateformat }}">Load Sheet</a>
+</div>
+
+{% endblock %}
