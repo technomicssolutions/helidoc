@@ -1,0 +1,14 @@
+Django==1.5
+MySQL-python==1.2.4
+PIL==1.1.7
+South==0.7.4
+argparse==1.2.1
+distribute==0.6.34
+django-debug-toolbar==0.9.4
+iptools==0.6.1
+pycrypto==2.6.1
+python-dateutil==2.2
+pytz==2013.8
+six==1.4.1
+sqlparse==0.1.10
+wsgiref==0.1.2
