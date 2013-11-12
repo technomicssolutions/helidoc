@@ -29,19 +29,9 @@ urlpatterns = patterns('',
     (r'^$','helidocs.diary.views.homepage'),
 
 
-
+    (r'^static/admin/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/home/technomics/venvs/helidocs/lib/python2.7/site-packages/django/contrib/admin/static/admin'}),
     (r'^admin/jsi18n/', 'django.views.i18n.javascript_catalog'),
-
- #   (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/Users/bhj/www/helidocs/static'}),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/Users/bhj/www/helidocs/static'}),
-
-    #    (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/home/helidocs/helidocs/helidocs/static'}),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'c:/wwwdjango/www/helidocs/static'}),
-#    (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'c:/wwwdjango/www/helidocs/static'}),
-
-    #    (r'^admin_media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'C:/Python26/Lib/site-packages/django/contrib/admin/media'}),
-
-
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/home/technomics/venvs/helidocs/helidocs/static'}),
     # (r'^helidocs/', include('helidocs.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
